@@ -5,8 +5,11 @@ This is a simple rock-paper-scissors game where you can play against the compute
 import random
 import time
 import os
-from easygui import passwordbox
-from easygui import msgbox
+try:
+    from easygui import passwordbox
+    from easygui import msgbox
+except ImportError:
+    pass
 
 our_choices = ["rock", "paper", "scissors"]
 GREEN = "\033[0;32m"
@@ -154,10 +157,26 @@ def menu():
     """
     print("""
     1. You Vs the AI
-    2. You vs another player
+    2. You Vs another player
     3. Rules
     4. End
     """)
+
+
+def rules():
+    """
+    Display the rules of the rock_paper_scissors game.
+    :return: None
+    """
+    print("Rock crushes scissors.")
+    print("Scissors cut paper.")
+    print("Paper covers rock.")
+    print("If both players choose the same option, it's a tie.")
+    print("\nTo play:")
+    print("1. Choose to play against the computer (option 1) or against another player (option2).")
+    print("2. Enter your choice when prompted.")
+    print("3. See the result of the round based on the rules.")
+    print("\nEnjoy the game!")
 
 
 def main():
@@ -168,7 +187,7 @@ def main():
     The user can choose different options, including playing with AI or another player and checking
     the rules or ending the game.
 
-    :return: None
+    :return: str -- Message to display after.
     """
     clear_console()
     print(GREEN)
@@ -185,14 +204,14 @@ def main():
         elif choice == "2":
             play_round_another_player()
         elif choice == "3":
-            print("Not implemented!")
+            rules()
         elif choice == "4":
             running = False
         else:
             print("Invalid choice. Please choose a correct number between 1 and 4.")
 
     # Message
-    print("have a good day")
+    return "have a good day"
 
 
 if __name__ == '__main__':
